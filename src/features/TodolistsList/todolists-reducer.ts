@@ -2,7 +2,7 @@ import { todolistsAPI, TodolistType } from "api/todolists-api"
 import { appActions, RequestStatusType } from "app/app-reducer"
 import { handleServerNetworkError } from "utils/error-utils"
 import { AppThunk } from "app/store"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit"
 
 const slice = createSlice({
   name: "todolist",
@@ -14,6 +14,8 @@ const slice = createSlice({
       if (index !== -1) state.splice(index, 1)
     },
     addTodolist: (state, action: PayloadAction<{ todolist: TodolistType }>) => {
+      // const a = current(state)
+      // debugger
       state.unshift({ ...action.payload.todolist, filter: "all", entityStatus: "idle" })
     },
     changeTodolistTitle: (state, action: PayloadAction<{ id: string; title: string }>) => {
