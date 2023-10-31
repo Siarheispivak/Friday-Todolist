@@ -1,9 +1,8 @@
-import { handleServerNetworkError } from "common/utils"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AppThunk } from "app/store"
-import { appActions } from "app/app-reducer"
-import {handleServerAppError} from "common/utils";
-import {authAPI, LoginParamsType} from "./authApi";
+import {handleServerAppError, handleServerNetworkError} from "common/utils"
+import {createSlice, PayloadAction} from "@reduxjs/toolkit"
+import {AppThunk} from "app/store"
+import {appActions} from "app/app-reducer"
+import {authApi, LoginParamsType} from "./auth.api";
 
 const slice = createSlice({
   name: "auth",
@@ -21,7 +20,7 @@ export const loginTC =
   (data: LoginParamsType): AppThunk =>
   (dispatch) => {
     dispatch(appActions.setAppStatus({ status: "loading" }))
-    authAPI
+    authApi
       .login(data)
       .then((res) => {
         if (res.data.resultCode === 0) {
@@ -37,7 +36,7 @@ export const loginTC =
   }
 export const logoutTC = (): AppThunk => (dispatch) => {
   dispatch(appActions.setAppStatus({ status: "loading" }))
-  authAPI
+  authApi
     .logout()
     .then((res) => {
       if (res.data.resultCode === 0) {

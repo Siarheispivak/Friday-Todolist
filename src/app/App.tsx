@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect } from "react"
+import React, {useCallback, useEffect} from "react"
 import "./App.css"
-import { TodolistsList } from "features/TodolistsList/TodolistsList"
-import { ErrorSnackbar } from "common/components/ErrorSnackbar/ErrorSnackbar"
-import { useDispatch, useSelector } from "react-redux"
-import { AppRootStateType } from "./store"
-import { initializeAppTC, RequestStatusType } from "./app-reducer"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Login } from "features/auth/Login/Login"
-import { logoutTC } from "features/auth/auth-reducer"
+import {TodolistsList} from "features/TodolistsList/TodolistsList"
+import {ErrorSnackbar} from "common/components/ErrorSnackbar/ErrorSnackbar"
+import {useDispatch, useSelector} from "react-redux"
+import {AppRootStateType} from "./store"
+import {initializeAppTC, RequestStatusType} from "./app-reducer"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {Login} from "features/auth/Login/Login"
+import {logoutTC} from "features/auth/auth.reducer"
 import {
   AppBar,
   Button,
@@ -18,7 +18,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material"
-import { Menu } from "@mui/icons-material"
+import {Menu} from "@mui/icons-material"
 
 type PropsType = {
   demo?: boolean

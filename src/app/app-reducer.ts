@@ -1,7 +1,7 @@
-import {authActions} from "features/auth/auth-reducer"
+import {authActions} from "features/auth/auth.reducer"
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {AppThunk} from "app/store"
-import {authAPI} from "features/auth/authApi";
+import {authApi} from "features/auth/auth.api";
 
 const slice = createSlice({
   name: "app",
@@ -24,7 +24,7 @@ const slice = createSlice({
 })
 
 export const initializeAppTC = (): AppThunk => (dispatch) => {
-  authAPI.me().then((res) => {
+  authApi.me().then((res) => {
     if (res.data.resultCode === 0) {
       // dispatch(setIsLoggedInAC(true))
       dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
