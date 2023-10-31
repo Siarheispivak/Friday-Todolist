@@ -1,8 +1,8 @@
-import { todolistsAPI, TodolistType } from "api/todolists-api"
-import { appActions, RequestStatusType } from "app/app-reducer"
-import { handleServerNetworkError } from "utils/error-utils"
-import { AppThunk } from "app/store"
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit"
+import {appActions, RequestStatusType} from "app/app-reducer"
+import {handleServerNetworkError} from "common/utils/handleServerNetworkError"
+import {AppThunk} from "app/store"
+import {createSlice, PayloadAction} from "@reduxjs/toolkit"
+import {todolistsAPI, TodolistType} from "./todolistApi";
 
 const slice = createSlice({
   name: "todolist",
@@ -73,7 +73,7 @@ export const removeTodolistTC = (todolistId: string): AppThunk => {
   return (dispatch) => {
     dispatch(appActions.setAppStatus({ status: "loading" }))
     dispatch(todolistActions.changeTodolistEntityStatus({ id: todolistId, status: "loading" }))
-    todolistsAPI.deleteTodolist(todolistId).then((res) => {
+    todolistsAPI.deleteTodolist(todolistId).then(() => {
       dispatch(todolistActions.removeTodolist({ id: todolistId }))
       //скажем глобально приложению, что асинхронная операция завершена
       dispatch(appActions.setAppStatus({ status: "succeeded" }))
@@ -91,7 +91,7 @@ export const addTodolistTC = (title: string): AppThunk => {
 }
 export const changeTodolistTitleTC = (id: string, title: string): AppThunk => {
   return (dispatch) => {
-    todolistsAPI.updateTodolist(id, title).then((res) => {
+    todolistsAPI.updateTodolist(id, title).then(() => {
       dispatch(todolistActions.changeTodolistTitle({ id: id, title: title }))
     })
   }
