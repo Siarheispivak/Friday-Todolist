@@ -5,29 +5,27 @@ import {tasksThunks} from "./tasks.reducer"
 import {Grid, Paper} from "@mui/material"
 import {Todolist} from "./Todolist/Todolist"
 import {Navigate} from "react-router-dom"
-import {useAppDispatch} from "common/hooks/useAppDispatch"
+import {useAppDispatch} from "common/hooks"
 import {AddItemForm} from "common/components";
 import {TaskStatuses} from "common/enum";
 import {selectTodolists} from "./todolist.selectors";
 import {selectTasks} from "./tasks.selectors";
 import {selectIsLoggedIn} from "../auth/auth.selectors";
 
-type PropsType = {
-  demo?: boolean
-}
 
-export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
+
+export const TodolistsList = () => {
   const todolists = useSelector(selectTodolists)
   const tasks = useSelector(selectTasks)
   const isLoggedIn = useSelector(selectIsLoggedIn)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (demo || !isLoggedIn) {
-      return
+    if (!isLoggedIn) {
+      return;
     }
-    dispatch(todosThunks.fetchTodolists())
-  }, [])
+    dispatch(todosThunks.fetchTodolists());
+  }, []);
 
   const removeTask = useCallback(function (taskId: string, todolistId: string) {
     dispatch(tasksThunks.removeTask({taskId, todolistId}))
@@ -90,7 +88,6 @@ export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
                   removeTodolist={removeTodolist}
                   changeTaskTitle={changeTaskTitle}
                   changeTodolistTitle={changeTodolistTitle}
-                  demo={demo}
                 />
               </Paper>
             </Grid>
